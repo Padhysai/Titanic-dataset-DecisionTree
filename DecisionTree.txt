@@ -1,0 +1,91 @@
+Decision Tree:
+
+Terminoligies:
+
+Root Node-Base node/first node of tree
+leaf node- end of tree
+splitting- dividing node into diff parts
+branch/subtree- nodes formed after splitting.
+pruning- opp of splitting
+parent/child node- root node is parent and remining are child nodes.
+
+
+
+
+How does a tree decide where to split?
+
+Gini index- measure of impurity/purity used in building decision tree.
+
+information gain-decrese in entropy after a dataset is split on the basis of attribute(constructing a decision tree is all about finding attribute that returns the highest information gain)
+
+Reduction in variance- it is an algorithm used for continoues target variables.
+
+chi square- it is an algorithm to find stastical significance between the difference between sub-nodes and parent node.
+
+
+
+Entropy:
+
+	- to measure the impurity of attributes
+	- defines randomness of attribute
+
+	Entropy(s) = -P(yes)log2 P(yes) - P(no)log2 P(no)
+	s-total sample space
+	P(yes)-probability of yes
+
+	if number of yes = number of no in dataset
+	P(s) = 0.5
+	Entropy(s)=1
+
+	if it contains all yes or all no in dataset
+	p(s) = 1 or 0
+	Entropy(s) = 0
+
+Information Gain:
+
+	-Measures the reduction in entropy
+	-Decides which attribute should be selected as the decision node.
+
+	if S is our total collection,
+	information gain = Entropy(S)-[(Weighted avg)*(Entropy(each feature)]
+
+
+Pruning: Cutting down the nodes inorder to get optimal solution.
+
+
+Model Selection:
+
+	- Linear relationship between dependent and independent variables --> Linear Model
+	
+	- Complex relationship between dependent and independent variables--> Tree Model
+
+	- Decision tree model are simpler to interpreate.
+
+
+
+Cart Algorithm:
+
+1. calculte entropy
+2. entropy and info gain for all nodes.
+3. entropy of each feature in node and I= weighted avg*Entropy
+4. Information gain (E(s) - I)
+5. Select a node with Highest Information gain as Root Node
+6. do same for remining.
+
+
+
+Scikit-Learn Code:(Dataset contains Company Job Degree as independent variables)
+
+1. 	from sklearn.preprocessing import LabelEncoder
+	le_company = LabelEncoder()
+	le_job = LabelEncoder()
+	le_degree = LabelEncoder()
+
+2.	inputs['company_n'] = le_company.fit_transform(inputs['company'])
+	inputs['job_n'] = le_job.fit_transform(inputs['job'])
+	inputs['degree_n'] = le_degree.fit_transform(inputs['degree'])
+
+3.	from sklearn import tree
+	model = tree.DecisionTreeClassifier()
+	model.fit()
+	model.predict()
